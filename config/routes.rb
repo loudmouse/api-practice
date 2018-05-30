@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root 'tanks#index'
+
   get 'tanks/new'
   get 'tanks/create'
   get 'tanks/update'
