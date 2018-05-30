@@ -2,10 +2,20 @@ class TanksController < ApplicationController
 
   def index
     @tanks = Tank.all
+
+    respond_to do |format|
+        format.html
+        format.json { render json: @tanks }
+      end
   end
 
   def show
     @tank = Tank.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @tank }
+    end
   end
 
   def new
@@ -20,8 +30,10 @@ class TanksController < ApplicationController
     @tank = Tank.new(tank_params)
 
     if @tank.save
+      flash[:notice] = "Tank created!"
       redirect_to @tank
     else
+      flash.now[:notice] = "Tank couldn't be created."
       render 'new'
     end
   end
@@ -30,8 +42,10 @@ class TanksController < ApplicationController
     @tank = Tank.find(params[:id])
 
     if @tank.update(tank_params)
+      flash[:notice] = "Tank updated!"
       redirect_to @tank
     else
+      flash.now[:notice] = "Tank couldn't be updated."
       render 'edit'
     end
   end
@@ -39,7 +53,8 @@ class TanksController < ApplicationController
   def destroy
     @tank = Tank.find(params[:id])
     @tank.destroy
-    
+    flash[:notice] = "Tank has been deleted!"
+
     redirect_to tanks_path
   end
 
