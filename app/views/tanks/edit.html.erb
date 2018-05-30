@@ -1,2 +1,30 @@
-<h1>Tanks#edit</h1>
-<p>Find me in app/views/tanks/edit.html.erb</p>
+<h1>Edit article</h1>
+
+<%= form_with(model: @tank, local: true) do |form| %>
+
+  <% if @tank.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@tank.errors.count, "error") %> prohibited
+        this tank from being saved:
+      </h2>
+      <ul>
+        <% @tank.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :address %><br>
+    <%= form.text_field :address %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+<% end %>
+
+<%= link_to 'Back', tanks_path %>

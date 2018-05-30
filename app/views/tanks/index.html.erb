@@ -1,2 +1,19 @@
-<h1>Tanks#index</h1>
-<p>Find me in app/views/tanks/index.html.erb</p>
+<table>
+  <tr>
+    <th>Address</th>
+    <th></th>
+  </tr>
+
+  <% @tanks.each do |tank| %>
+    <tr>
+      <td><%= tank.address %></td>
+      <td><%= link_to 'Show', tank_path(tank) %></td>
+      <td><%= link_to 'Edit', edit_tank_path(tank) %></td>
+      <td><%= link_to 'Destroy', tank_path(tank),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'All Tanks', controller: 'tanks' %>
+<%= link_to 'New Tank', new_tank_path %>
